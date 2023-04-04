@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# VoiceOver bug test
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project uses ordered list element to simulate messages being sent with different content and in different intervals to test out a VoiceOver bug that causes it to stop reading content after a certain number of messages.
+
+The number of simulated messages can easily be modified in the code itself.
 
 ## Available Scripts
 
