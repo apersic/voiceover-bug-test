@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setData((oldArr) => [...oldArr, "message" + Math.random()]);
+    }, Math.floor(Math.random() * 3000) + 1000);
+    // After 20 messages we stop sending new ones.
+    if (data.length === 20) {
+      clearInterval(interval)
+    }
+    return () => clearInterval(interval);
+  }, [data.length]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" aria-live="polite">
+      <ol>
+        {data.map((item, index) => (
+          <li key={index} aria-label={item}>{item}</li>
+        ))}
+      </ol>
     </div>
   );
 }
